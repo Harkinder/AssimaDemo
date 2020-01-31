@@ -25,6 +25,7 @@ namespace AssimaDemo
             string reportTime = DateTime.Now.ToString("hh:mm:ss");
             extent = new AventStack.ExtentReports.ExtentReports();
             var reportPath = currDir.Replace("/bin/Debug/netcoreapp3.1", "/GeneratedReports/");
+            //TO-DO: Add versioning of generated reports based on timestamps
             var htmlReporter = new ExtentHtmlReporter(reportPath + "TestLogin-" + reportTime + ".html");
             extent.AttachReporter(htmlReporter);
         }
