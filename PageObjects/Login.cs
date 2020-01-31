@@ -3,6 +3,10 @@ using NUnit;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace AssimaDemo.PageObjects
 {
@@ -25,15 +29,21 @@ namespace AssimaDemo.PageObjects
 
         public void performLogin(string username, string password)
         {
-            Console.WriteLine("Clicking on Sign In Button");
             signInBtn.Click();
-            Console.WriteLine("Entering Username");
             username_txtfield.SendKeys(username);
-            Console.WriteLine("Entering Password");
             passwrd_txtfield.SendKeys(password);
-            Console.WriteLine("Clicking on Sign In Button to finally Login");
             loginBtn.Click();
         }
+
+        public void enterUsername(string username)
+        {
+            username_txtfield.SendKeys(username);
+        }
+        public void enterPassword(string password)
+        {
+            passwrd_txtfield.SendKeys(password);
+        }
+
     }
 
 

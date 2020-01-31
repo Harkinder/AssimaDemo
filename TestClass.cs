@@ -11,27 +11,20 @@ using AssimaDemo.PageObjects;
 
 namespace AssimaDemo
 {
-
-    public class TestClass
+    public class TestClass : config.Config
     {
-
-        private IWebDriver driver;
-
-        [SetUp]
-        public void SetUp()
-        {
-            ChromeDriverService service = ChromeDriverService.CreateDefaultService(@"/Users/usamarashid/Downloads", "chromedriver");
-            service.Port = 64445;
-            driver = new ChromeDriver(service);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
-            driver.Url ="https://www.github.com/";
-        }
-   
         [Test]
         public void LoginToGithub()
         {
            Login login = new Login(driver);
-           login.performLogin("admin", "admin");
+           Assert.IsTrue(login.signInBtn.Displayed);
+           login.signInBtn.Click(); 
+           Assert.IsTrue(login.username_txtfield.Displayed);
+           login.enterUsername("admin");
+           Assert.IsTrue(login.passwrd_txtfield.Displayed);
+           login.enterPassword("admin");
+           Assert.IsTrue(login.loginBtn.Displayed);
+           login.loginBtn.Click();
         }
 
         [TearDown]
