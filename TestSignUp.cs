@@ -12,20 +12,8 @@ using AssimaDemo.PageObjects;
 namespace AssimaDemo
 {
 
-    public class TestSignUp
+    public class TestSignUp : config.Config
     {
-
-        private IWebDriver driver;
-
-        [SetUp]
-        public void SetUp()
-        {
-            ChromeDriverService service = ChromeDriverService.CreateDefaultService(@"/Users/ali/Downloads", "chromedriver");
-            service.Port = 64445;
-            driver = new ChromeDriver(service);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
-            driver.Url ="https://www.github.com/";
-        }
    
         [Test]
         [TestCase("Alisubhani123","ali.subhani+1@tintash.com","Tintashhhh123")]
@@ -53,7 +41,7 @@ namespace AssimaDemo
            Signup signup=new Signup(driver);
            signup.SignUpWithWrongEmail(Email);
         }
-
+        [TearDown]
         public void TearDown()
         {
             driver.Close();

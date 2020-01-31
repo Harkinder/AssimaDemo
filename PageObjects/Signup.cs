@@ -39,7 +39,7 @@ public void SignUpWithWrongUserName(string username)
         Console.WriteLine("Entering Username");
         username_txtfield.SendKeys(username);
         _driver.SwitchTo().DefaultContent();
-        Assert.AreEqual(_driver.FindElement(By.XPath("/html/body/div[4]/main/div[1]/div/div/div[2]/div/form/auto-check[1]/dl/dd[2]")).Displayed, true);
+        Assert.AreEqual(_driver.FindElement(By.XPath("/html/body/div[4]/main/div[1]/div/div/div[2]/div/form/auto-check[1]/dl/dd[2]/div/div[1]")).Displayed, true);
 
     }
 
@@ -47,7 +47,9 @@ public void SignUpWithWrongEmail(string email)
         {
         Console.WriteLine("Entering Email");
         email_txtfield.SendKeys(email);
-        
+        _driver.SwitchTo().DefaultContent();
+        Assert.AreEqual(_driver.FindElement(By.XPath("/html/body/div[4]/main/div[1]/div/div/div[2]/div/form/auto-check[2]/dl/dd[2]")).Displayed, true);
+
         }
     }
 }

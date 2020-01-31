@@ -11,7 +11,7 @@ using AssimaDemo.PageObjects;
 
 namespace AssimaDemo
 {
-    public class TestClass : config.Config
+    public class TestLogin : config.Config
     {
         [Test]
         public void LoginToGithub()
