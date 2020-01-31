@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/usamarashid/Desktop/Assima/Assima.csproj": {}
+    "/Users/usamarashid/Desktop/AssimaDemo/Assima.csproj": {}
   },
   "projects": {
-    "/Users/usamarashid/Desktop/Assima/Assima.csproj": {
+    "/Users/usamarashid/Desktop/AssimaDemo/Assima.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/usamarashid/Desktop/Assima/Assima.csproj",
+        "projectUniqueName": "/Users/usamarashid/Desktop/AssimaDemo/Assima.csproj",
         "projectName": "Assima",
-        "projectPath": "/Users/usamarashid/Desktop/Assima/Assima.csproj",
+        "projectPath": "/Users/usamarashid/Desktop/AssimaDemo/Assima.csproj",
         "packagesPath": "/Users/usamarashid/.nuget/packages/",
-        "outputPath": "/Users/usamarashid/Desktop/Assima/obj/",
+        "outputPath": "/Users/usamarashid/Desktop/AssimaDemo/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/usamarashid/.nuget/NuGet/NuGet.Config"
@@ -40,6 +40,10 @@
               "target": "Package",
               "version": "[1.0.3, )"
             },
+            "Microsoft.AspNet.Razor": {
+              "target": "Package",
+              "version": "[3.2.7, )"
+            },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[16.4.0, )"
@@ -61,6 +65,14 @@
             "Selenium.WebDriver": {
               "target": "Package",
               "version": "[3.141.0, )"
+            },
+            "System.CodeDom": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "System.Security.Principal.Windows": {
+              "target": "Package",
+              "version": "[4.7.0, )"
             }
           },
           "imports": [
