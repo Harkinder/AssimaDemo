@@ -15,6 +15,8 @@ using System.IO;
 
 namespace AssimaDemo
 {
+
+    
     public class TestLogin : config.Config
     {
         public AventStack.ExtentReports.ExtentReports extent =  new AventStack.ExtentReports.ExtentReports();
@@ -22,23 +24,27 @@ namespace AssimaDemo
         [OneTimeSetUp]
         public void ExtentStart()
         {
-            string reportTime = DateTime.Now.ToString("hh:mm:ss");
+            string reportTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz");
             extent = new AventStack.ExtentReports.ExtentReports();
             var reportPath = currDir.Replace("/bin/Debug/netcoreapp3.1", "/GeneratedReports/");
             var htmlReporter = new ExtentV3HtmlReporter(reportPath + "TestLogin-" + reportTime + ".html");
             extent.AttachReporter(htmlReporter);
-        }
+        } 
 
         [OneTimeTearDown]
         public void ExtentClose()
         {
             extent.Flush(); 
         }
-
+        
         [Test]
         public void LoginToGithub()
         {
-            
+           var dataPath = currDir.Replace("/bin/Debug/netcoreapp3.1", "/Data/");
+           List<string> data = loadCsvFile(dataPath + "credentials.csv");
+           string dataFromCSV = data.ElementAt(1);
+           string[] credentials = dataFromCSV.Split(';');
+
            ExtentTest test;
            test = extent.CreateTest("testLoginMethod").Info("Test Started"); 
 
@@ -49,13 +55,25 @@ namespace AssimaDemo
            login.signInBtn.Click(); 
            Assert.IsTrue(login.username_txtfield.Displayed);
            test.Log(Status.Info,"Entering username...");
-           login.enterUsername("admin");
+           login.enterUsername(credentials[0]);
            Assert.IsTrue(login.passwrd_txtfield.Displayed);
            test.Log(Status.Info,"Entering password...");
-           login.enterPassword("admin");
+           login.enterPassword(credentials[1]);
            Assert.IsTrue(login.loginBtn.Displayed);
            test.Log(Status.Info,"Clicking on Login Button to finally login to Github.");
            login.loginBtn.Click();
+        }
+
+        public List<string> loadCsvFile(string filePath)
+        {
+            var reader = new StreamReader(File.OpenRead(filePath));
+            List<string> searchList = new List<string>();
+            while(!reader.EndOfStream)
+            {
+                var line = reader.ReadLine();
+                searchList.Add(line);
+            }
+            return searchList;
         }
 
         [TearDown]
