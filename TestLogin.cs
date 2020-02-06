@@ -16,26 +16,8 @@ using System.IO;
 namespace AssimaDemo
 {
 
-    
     public class TestLogin : config.Config
     {
-        public AventStack.ExtentReports.ExtentReports extent =  new AventStack.ExtentReports.ExtentReports();
-
-        [OneTimeSetUp]
-        public void ExtentStart()
-        {
-            string reportTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz");
-            extent = new AventStack.ExtentReports.ExtentReports();
-            var reportPath = currDir.Replace("/bin/Debug/netcoreapp3.1", "/GeneratedReports/");
-            var htmlReporter = new ExtentV3HtmlReporter(reportPath + "TestLogin-" + reportTime + ".html");
-            extent.AttachReporter(htmlReporter);
-        } 
-
-        [OneTimeTearDown]
-        public void ExtentClose()
-        {
-            extent.Flush(); 
-        }
         
         [Test]
         public void LoginToGithub()
@@ -45,7 +27,6 @@ namespace AssimaDemo
            string dataFromCSV = data.ElementAt(1);
            string[] credentials = dataFromCSV.Split(';');
 
-           ExtentTest test;
            test = extent.CreateTest("testLoginMethod").Info("Test Started"); 
 
            Login login = new Login(driver);
@@ -75,13 +56,6 @@ namespace AssimaDemo
             }
             return searchList;
         }
-
-        [TearDown]
-        public void TearDown()
-        {
-            driver.Close();
-        }
-  
     }
 
 }

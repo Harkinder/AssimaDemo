@@ -8,6 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AssimaDemo.PageObjects;
+using AventStack.ExtentReports;
+using AventStack.ExtentReports.Reporter;
+using System.IO;
 
 namespace AssimaDemo
 {
@@ -20,6 +23,7 @@ namespace AssimaDemo
         
         public void SignUpToGithub(string username, string email, string passwrd)
         {
+           test = extent.CreateTest("testSignUpToGithub").Info("Test Started"); 
            Signup signup=new Signup(driver);
            signup.performSignUp(username,email,passwrd);
         }
@@ -29,6 +33,7 @@ namespace AssimaDemo
         
         public void SignUpWithWrongUsername(string usrname)
         {
+           test = extent.CreateTest("testSignUpWithWrongUsername").Info("Test Started"); 
            Signup signup=new Signup(driver);
            signup.SignUpWithWrongUserName(usrname);
         }
@@ -38,15 +43,10 @@ namespace AssimaDemo
         
         public void SignUpWithWrongEmail(string Email)
         {
+           test = extent.CreateTest("testSignUpWithWrongEmail").Info("Test Started"); 
            Signup signup=new Signup(driver);
            signup.SignUpWithWrongEmail(Email);
         }
-        [TearDown]
-        public void TearDown()
-        {
-            driver.Close();
-        }
-  
     }
 
 }
