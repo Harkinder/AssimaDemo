@@ -7,6 +7,7 @@ using System.IO;
 using AssimaDemo.PageObjects;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
+using System.Runtime.InteropServices;
 
 namespace AssimaDemo.config
 {
@@ -17,6 +18,13 @@ namespace AssimaDemo.config
         public static ExtentV3HtmlReporter htmlReporter;
         public static AventStack.ExtentReports.ExtentReports extent;
         public static ExtentTest test;
+
+        public static bool isWindows = System.Runtime.InteropServices.RuntimeInformation
+                                               .IsOSPlatform(OSPlatform.Windows); 
+           
+        public static bool isMac = System.Runtime.InteropServices.RuntimeInformation
+                                               .IsOSPlatform(OSPlatform.OSX);
+
 
         [SetUp]
         public void SetUp()
@@ -29,11 +37,20 @@ namespace AssimaDemo.config
         [OneTimeSetUp]
         public void ExtentStart()
         {
+            var reportPath = "";
+
             string reportTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz");
-            var reportPath = currDir.Replace("/bin/Debug/netcoreapp3.1", "/GeneratedReports/");
-            
+            if (isWindows)
+            {   
+                reportPath = currDir.Replace("\\bin\\Debug\\netcoreapp3.1", "\\GeneratedReports\\");
+            }
+            else if (isMac)
+            {
+                reportPath = currDir.Replace("/bin/Debug/netcoreapp3.1", "/GeneratedReports/");
+            }
+
             extent = new AventStack.ExtentReports.ExtentReports();
-            htmlReporter = new ExtentV3HtmlReporter(reportPath + "AutomatedTestReport-" + reportTime + ".html");
+            htmlReporter = new ExtentV3HtmlReporter(reportPath + "AutomatedTestReport-" + ".html");
             extent.AttachReporter(htmlReporter);
             
         }

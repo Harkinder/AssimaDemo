@@ -11,7 +11,7 @@ using AventStack.ExtentReports.Reporter;
 using System.Threading.Tasks;
 using AssimaDemo.PageObjects;
 using System.IO;
-
+using System.Runtime.InteropServices;
 
 namespace AssimaDemo
 {
@@ -22,7 +22,19 @@ namespace AssimaDemo
         [Test]
         public void LoginToGithub()
         {
-           var dataPath = currDir.Replace("/bin/Debug/netcoreapp3.1", "/Data/");
+           string dataPath = "";
+
+           if (isWindows)
+           {
+                dataPath = currDir.Replace("\\bin\\Debug\\netcoreapp3.1", "\\Data\\");
+           }
+           else if (isMac)
+           {
+                dataPath = currDir.Replace("/bin/Debug/netcoreapp3.1", "/Data/");
+           }
+
+           Console.WriteLine(dataPath); 
+           //var dataPath = currDir.Replace("/bin/Debug/netcoreapp3.1", "/Data/");
            List<string> data = loadCsvFile(dataPath + "credentials.csv");
            string dataFromCSV = data.ElementAt(1);
            string[] credentials = dataFromCSV.Split(';');
